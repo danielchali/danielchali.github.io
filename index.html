@@ -1,300 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title>Daniel Chali • Computer Scientist</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Portfolio of Daniel Chali — third-year Bachelor's in ICT with Education at Kapasa Makasa University, Chinsali, Zambia." />
-    <meta name="author" content="Daniel Chali" />
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="Daniel Chali • Tech Portfolio" />
-    <meta property="og:description" content="Third-year Bachelor's in ICT with Education @ Kapasa Makasa University. Projects, experience, and skills." />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="assets/DredLabs_logo.png" />
-    <meta property="og:url" content="https://iamdanielchali.github.io" />
-
-    <!-- Favicon (optional) -->
-    <link rel="icon" href="assets/DredLabs_logo.png" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="styles.css" />
-    <!-- Add Font Awesome for social icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-<script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chali Daniel — Graphics Designer, Web Designer & Developer</title>
+  <meta name="description" content="Chali Daniel is a professional Graphics Designer, Web Designer & Developer specializing in business websites, brand identity, UI/UX design, and full-stack development.">
+  <meta name="keywords" content="Chali Daniel, web designer, graphics designer, web developer, UI/UX, brand identity, Zambia">
+  <meta name="author" content="Chali Daniel">
+  <meta property="og:title" content="Chali Daniel — Graphics Designer, Web Designer & Developer">
+  <meta property="og:description" content="Professional portfolio showcasing web design, graphics design, brand identity, and full-stack development work.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
 <body>
-    <header class="site-header">
-        <div class="container header-inner">
-            <a class="logo" href="#home" aria-label="Go to top">DC</a>
-            <nav class="nav">
-                <a href="#projects">Projects</a>
-                <a href="#experience">Experience</a>
-                <a href="#education">Education</a>
-                <a href="#skills">Skills</a>
-                <a href="#contact">Contact</a>
-            </nav>
-            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon"><img src="assets/Me/DredLabs_logo.png" alt="DredLabs Logo" style="width: 100%; height: 100%; object-fit: contain;"></div>
+        <span>Chali<span class="gradient-text">Daniel</span></span>
+      </a>
+      <div class="nav-links" id="nav-links">
+        <a href="index.html" class="active">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html" class="nav-cta btn btn-primary" style="padding: 10px 24px; font-size: 0.85rem;">Let's Talk</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="nav-overlay" id="nav-overlay"></div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div id="hero-canvas" class="hero-canvas"></div>
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <div class="hero-badge">
+        <span class="dot"></span>
+        Available for freelance projects
+      </div>
+      <h1>
+        <span class="line"><span>Hi, I'm <span class="gradient-text">Daniel Chali</span>.</span></span>
+        <span class="line"><span>I Design & Build</span></span>
+        <span class="line"><span><span id="typed-text">Digital Experiences</span><span class="gradient-text" style="animation: pulse-dot 1s infinite; font-weight:300">|</span></span></span>
+      </h1>
+      <p>Fourth-year ICT student at Kapasa Makasa University, Zambia. I build software tools, websites, mobile apps, and desktop applications. Full-stack MERN developer passionate about AI & Robotics.</p>
+      <div class="hero-buttons">
+        <a href="portfolio.html" class="btn btn-primary"><i class="fas fa-arrow-right" style="margin-right: 4px;"></i>View My Work</a>
+        <a href="contact.html" class="btn btn-outline"><i class="fas fa-envelope" style="margin-right: 4px;"></i>Get In Touch</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-number" data-count="20">20+</div>
+          <div class="stat-label">Projects Completed</div>
         </div>
-    </header>
-
-    <main id="home">
-        <!-- Hero -->
-        <section class="hero container" data-animate>
-            <div class="hero-content">
-                <!-- Insert profile picture placeholder -->
-                <img class="avatar" src="assets/profile.jpg" alt="Daniel Chali profile photo" width="160" height="160" />
-                <h1 class="headline">
-                    Hi, I'm <span class="gradient-text">Daniel Chali</span>.
-                </h1>
-                <p class="subtitle">
-                    Third-year Bachelor's in ICT with Education at Kapasa Makasa University, Chinsali, Zambia.
-                </p>
-                <p class="summary">
-                    I build software tools such as web apps/websites, mobile apps and desktop applications.
-                    I'm a fullstack developer in MERN stack and Python.
-                    Passionate about AI and Robotics which i'm currently Learning.
-                </p>
-                <div class="actions">
-                    <!--  -->
-                    <a class="btn primary" href="mailto:iamdanielchali@gmail.com">Email Me</a>
-                    <a class="btn" href="#" rel="noopener">Resume</a>
-                    <a class="btn" href="https://github.com/iamdanielchali" target="_blank" rel="noopener">GitHub</a>
-                    <a class="btn" href="https://www.linkedin.com/in/danielchali" target="_blank" rel="noopener">LinkedIn</a>
-                </div>
-                <ul class="tech-stack">
-                    <li>HTML</li>
-                    <li>CSS</li>
-                    <li>JavaScript</li>
-                    <li>React</li>
-                    <li>Node.js</li>
-                    <li>Python</li>
-                    
-                </ul>
-            </div>
-        </section>
-
-        <!-- Projects -->
-        <section id="projects" class="section container">
-            <h2 class="section-title" data-animate>Featured Projects</h2>
-            <div class="grid">
-                <!-- Insert CampusCare project card -->
-                <article class="card" data-animate>
-                    <img class="card-cover" src="assets/projects/campuscare.png" alt="CampusCare project cover (placeholder)" />
-                    <div class="card-body">
-                        <h3 class="card-title">CampusCare</h3>
-                        <p class="card-text">
-                            A smart reporting platform for storing and tracking student maintenance and discipline cases across campus.
-                        </p>
-                        <ul class="tags">
-                            <li>AI</li> 
-                            <li>MERN</li>
-                            <li>Analytics</li>
-                            <li>Accessibility</li>
-                        </ul>
-                        <div class="card-actions">
-                            <a class="btn small" href="#" target="_blank" rel="noopener">Live</a>
-                            <a class="btn small" href="#" target="_blank" rel="noopener">Code</a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Project Card 2 -->
-                <article class="card" data-animate>
-                    <img class="card-cover" src="assets/projects/attendance-app.png" alt="RMS" />
-                    <div class="card-body">
-                        <h3 class="card-title">Restaurant Management System</h3>
-                        <p class="card-text">
-                            A Restaurant web app for placing and managing orders from customers.
-                        </p>
-                        <ul class="tags">
-                            <li>PWA</li>
-                            <li>MongoDB</li>
-                            <li>Charts</li>
-                        </ul>
-                        <div class="card-actions">
-                            <a class="btn small" href="#" target="_blank" rel="noopener">Live</a>
-                            <a class="btn small" href="#" target="_blank" rel="noopener">Code</a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Project Card 3 -->
-                <article class="card" data-animate>
-                    <img class="card-cover" src="assets/projects/learning-tools.png" alt="SMS AI" />
-                    <div class="card-body">
-                        <h3 class="card-title">SMS AI Agent</h3>
-                        <p class="card-text">
-                            An AI chatbot that is accessible on sms
-                        </p>
-                        <ul class="tags">
-                            <li>Python</li>
-                            <li>AI</li>
-                            <li>Accessibility</li>
-                        </ul>
-                        <div class="card-actions">
-                            <a class="btn small" href="#" target="_blank" rel="noopener">Live</a>
-                            <a class="btn small" href="#" target="_blank" rel="noopener">Code</a>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <!-- Experience -->
-        <section id="experience" class="section container">
-            <h2 class="section-title" data-animate>Experience</h2>
-            <div class="timeline">
-                <div class="timeline-item" data-animate>
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Peer Tutor • Kapasa Makasa University</h3>
-                        <p class="muted">2023 — Present • Chinsali, Zambia</p>
-                        <p>Guided fellow students in foundational programming, web development, and data basics; created helpful study aids and demos.</p>
-                        <ul class="tags">
-                            <li>Teaching</li>
-                            <li>JavaScript</li>
-                            <li>Python</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="timeline-item" data-animate>
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Student Projects • ICT with Education</h3>
-                        <p class="muted">2023 — Present</p>
-                        <p>Built Hostel maintenance and discipline reporting platform focusing on accessibility, UI/UX, and case tracking tools.</p>
-                        <ul class="tags">
-                            <li>React</li>
-                            <li>Node</li>
-                            <li>Typescript</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="timeline-item" data-animate>
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Graduation Gown Designs • Kapasa Makasa University</h3>
-                        <p class="muted">2023 — Present • Chinsali, Zambia</p>
-                        <p>I designed the Graduation Regalia for Kapasa Makasa University.</p>
-                        <ul class="tags">
-                            <li>Graphics</li>
-                            <li>Photoshop</li>
-                            <li>Canva</li>
-                        </ul>
-                    </div>
-            </div>
-        </section>
-
-        <!-- Education -->
-        <section id="education" class="section container">
-            <h2 class="section-title" data-animate>Education</h2>
-            <div class="edu">
-                <div class="edu-item" data-animate>
-                    <h3><a href="http://kmu.ac.zm">Kapasa Makasa University</a></h3>
-                    <p class="muted">Bachelor's Degree in ICT with Education</p>
-                    <p>Coursework: Web Development, Databases, Data Structures & Algorithms, Data Communications and Networking, Database Management, Software Engineering, ICT Teaching Methods.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Skills -->
-        <section id="skills" class="section container">
-            <h2 class="section-title" data-animate>Skills</h2>
-            <div class="skills">
-                <div class="skills-group" data-animate>
-                    <h3>Frontend</h3>
-                    <ul class="pill-list">
-                        <li>HTML5</li>
-                        <li>CSS3</li>
-                        <li>JavaScript (ES6+)</li>
-                        <li>React</li>
-                        <!-- Add mobile app framework -->
-                        <li>React Native</li>
-                        <li>Responsive Design</li>
-                        <li>Accessibility</li>
-                    </ul>
-                </div>
-                <div class="skills-group" data-animate>
-                    <h3>Backend</h3>
-                    <ul class="pill-list">
-                        <li>Node.js</li>
-                        <li>Express</li>
-                        <li>REST APIs</li>
-                        <li>PostgreSQL</li>
-                        <li>Firebase</li>
-                        <!-- Add MERN stack elements and Python -->
-                        <li>MongoDB</li>
-                        <li>Python</li>
-                    </ul>
-                </div>
-                <div class="skills-group" data-animate>
-                    <h3>Tools & Other</h3>
-                    <ul class="pill-list">
-                        <li>Git & GitHub</li>
-                        <li>VS Code</li>
-                        <li>Figma</li>
-                        <!-- Add AI, Robotics, Graphics Design -->
-                        <li>AI/ML</li>
-                        <li>Robotics</li>
-                        <li>Graphic Designer (<a href="https://github.com/iamdanielchali/gown-poll" target="_blank" rel="noopener">view designs</a>)</li>
-                        <li>Teaching & Mentoring</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- Contact -->
-        <section id="contact" class="section container">
-            <h2 class="section-title" data-animate>Contact</h2>
-            <div class="contact">
-                <p>Want to collaborate or say hello?</p>
-                <div class="actions">
-                    <!-- Update email to your address -->
-                    <a class="btn primary" href="mailto:iamdanielchali@gmail.com">iamdanielchali@gmail.com</a>
-                    <button class="btn" id="copy-email" data-email="iamdanielchali@gmail.com">Copy Email</button>
-                </div>
-                <div class="linkedin-badge">
-                    <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="dark" data-type="VERTICAL" data-vanity="daniel-chali-681628379" data-version="v1"><a class="badge-base__link LI-simple-link" href="https://zm.linkedin.com/in/danielchali?trk=profile-badge">Daniel Chali</a></div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="site-footer">
-        <div class="container footer-inner">
-            <p class="muted">© <span id="year"></span> Daniel Chali. Built with HTML, CSS, and JavaScript.</p>
-            <!-- Replace socials with icon-enhanced links -->
-            <div class="socials">
-                <a href="https://github.com/iamdanielchali" target="_blank" rel="noopener" aria-label="GitHub">
-                    <i class="fab fa-github" aria-hidden="true"></i> GitHub
-                </a>
-                <a href="https://www.linkedin.com/in/danielchali" target="_blank" rel="noopener" aria-label="LinkedIn">
-                    <i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn
-                </a>
-                <a href="https://fb.me/iamdanielchali" target="_blank" rel="noopener" aria-label="Facebook">
-                    <i class="fab fa-facebook" aria-hidden="true"></i> Facebook
-                </a>
-                <a href="https://www.tiktok.com/@iamdanielchali" target="_blank" rel="noopener" aria-label="TikTok">
-                    <i class="fab fa-tiktok" aria-hidden="true"></i> TikTok
-                </a>
-                <a href="https://www.instagram.com/iamdanielchali" target="_blank" rel="noopener" aria-label="Instagram">
-                    <i class="fab fa-instagram" aria-hidden="true"></i> Instagram
-                </a>
-                <a href="https://www.youtube.com/@iamdanielchali" target="_blank" rel="noopener" aria-label="YouTube">
-                    <i class="fab fa-youtube" aria-hidden="true"></i> YouTube
-                </a>
-                <a href="mailto:iamdanielchali@gmail.com" aria-label="Email">
-                    <i class="fas fa-envelope" aria-hidden="true"></i> Email
-                </a>
-            </div>
+        <div class="stat">
+          <div class="stat-number" data-count="15">15+</div>
+          <div class="stat-label">Happy Clients</div>
         </div>
-    </footer>
+        <div class="stat">
+          <div class="stat-number" data-count="3">3+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <div class="mouse"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
 
-    <script src="script.js"></script>
+  <!-- Services Preview -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="label">What I Do</span>
+        <h2>Services I <span class="gradient-text">Offer</span></h2>
+        <p>From brand identity to full-stack web applications, I deliver end-to-end digital solutions.</p>
+      </div>
+      <div class="services-grid stagger-children">
+        <div class="service-card tilt-card">
+          <span class="service-icon"><i class="fas fa-globe"></i></span>
+          <h3>Business Websites</h3>
+          <p>Professional, responsive websites that drive conversions for small businesses and startups.</p>
+          <a href="services.html" class="btn btn-outline" style="padding:10px 20px; font-size:0.85rem;"><i class="fas fa-arrow-right" style="margin-right: 4px;"></i>Learn More</a>
+        </div>
+        <div class="service-card tilt-card">
+          <span class="service-icon"><i class="fas fa-palette"></i></span>
+          <h3>Brand Identity</h3>
+          <p>Complete logo + website bundles that establish a cohesive, memorable brand presence.</p>
+          <a href="services.html" class="btn btn-outline" style="padding:10px 20px; font-size:0.85rem;"><i class="fas fa-arrow-right" style="margin-right: 4px;"></i>Learn More</a>
+        </div>
+        <div class="service-card tilt-card">
+          <span class="service-icon"><i class="fas fa-mobile-alt"></i></span>
+          <h3>UI/UX + Development</h3>
+          <p>User-centered interfaces backed by robust frontend and full-stack development.</p>
+          <a href="services.html" class="btn btn-outline" style="padding:10px 20px; font-size:0.85rem;"><i class="fas fa-arrow-right" style="margin-right: 4px;"></i>Learn More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Portfolio -->
+  <section class="section" style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="label">Selected Work</span>
+        <h2>Featured <span class="gradient-text">Projects</span></h2>
+        <p>A selection of recent work across web design, branding, and development.</p>
+      </div>
+      <div class="featured-grid stagger-children">
+        <div class="portfolio-card tilt-card">
+          <div class="portfolio-image">
+            <img src="assets/portfolio/brewbean.png" alt="Brew & Bean coffee shop website design" loading="lazy">
+            <div class="portfolio-overlay">
+              <a href="portfolio.html" class="btn btn-primary" style="padding:10px 20px; font-size:0.85rem;"><i class="fas fa-external-link-alt" style="margin-right: 4px;"></i>View Project</a>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <span class="portfolio-category">Branding + Website</span>
+            <h3>Brew & Bean</h3>
+            <p>Complete brand identity and website for an artisan coffee shop.</p>
+            <div class="portfolio-tools">
+              <span class="portfolio-tool">Figma</span>
+              <span class="portfolio-tool">HTML/CSS</span>
+              <span class="portfolio-tool">JavaScript</span>
+            </div>
+          </div>
+        </div>
+        <div class="portfolio-card tilt-card">
+          <div class="portfolio-image">
+            <img src="assets/portfolio/novatech.png" alt="NovaTech tech startup website design" loading="lazy">
+            <div class="portfolio-overlay">
+              <a href="portfolio.html" class="btn btn-primary" style="padding:10px 20px; font-size:0.85rem;"><i class="fas fa-external-link-alt" style="margin-right: 4px;"></i>View Project</a>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <span class="portfolio-category">Brand Identity + Web App</span>
+            <h3>NovaTech</h3>
+            <p>Futuristic brand system and SaaS landing page for a tech startup.</p>
+            <div class="portfolio-tools">
+              <span class="portfolio-tool">React</span>
+              <span class="portfolio-tool">Node.js</span>
+              <span class="portfolio-tool">Illustrator</span>
+            </div>
+          </div>
+        </div>
+        <div class="portfolio-card tilt-card">
+          <div class="portfolio-image">
+            <img src="assets/portfolio/fitpulse.png" alt="FitPulse fitness app landing page design" loading="lazy">
+            <div class="portfolio-overlay">
+              <a href="portfolio.html" class="btn btn-primary" style="padding:10px 20px; font-size:0.85rem;"><i class="fas fa-external-link-alt" style="margin-right: 4px;"></i>View Project</a>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <span class="portfolio-category">Landing Page</span>
+            <h3>FitPulse</h3>
+            <p>High-converting landing page for a fitness tracking application.</p>
+            <div class="portfolio-tools">
+              <span class="portfolio-tool">Figma</span>
+              <span class="portfolio-tool">React</span>
+              <span class="portfolio-tool">GSAP</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center; margin-top:48px;" class="reveal">
+        <a href="portfolio.html" class="btn btn-outline">View All Projects →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section cta-section">
+    <div class="container">
+      <div class="cta-box reveal-scale">
+        <h2>Ready to bring your <span class="gradient-text">vision to life</span>?</h2>
+        <p>Let's collaborate and create something extraordinary together.</p>
+        <a href="contact.html" class="btn btn-primary">Start a Project →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">
+            <div class="logo-icon"><img src="assets/Me/DredLabs_logo.png" alt="DredLabs Logo" style="width: 100%; height: 100%; object-fit: contain;"></div>
+            <span>Chali<span class="gradient-text">Daniel</span></span>
+          </a>
+          <p>Graphics Designer, Web Designer & Developer based in Zambia. Building digital experiences that make an impact.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="services.html">Services</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="services.html">Business Websites</a>
+          <a href="services.html">Landing Pages</a>
+          <a href="services.html">Brand Identity</a>
+          <a href="services.html">UI/UX Design</a>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <a href="mailto:iamdanielchali@gmail.com">Email</a>
+          <a href="https://github.com/iamdanielchali" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/danielchali" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="current-year"></span> Chali Daniel. All rights reserved.</span>
+        <span>Designed & Built by Daniel Chali</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/three-scene.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
