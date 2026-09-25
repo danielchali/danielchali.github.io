@@ -17,6 +17,7 @@
   <meta name="twitter:description" content="Explore the creative portfolio of Chali Daniel, featuring web design, branding, and development projects.">
   <link rel="icon" href="assets/Me/DredLabs_logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/portfolio-refresh.css">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -32,7 +33,7 @@
   }
   </script>
 </head>
-<body>
+<body class="portfolio-page">
 
   <!-- Navigation -->
   <nav class="navbar scrolled" id="navbar">
@@ -45,7 +46,7 @@
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="services.html">Services</a>
-        <a href="portfolio.html" class="active">Portfolio</a>
+        <a href="portfolio.html" class="active" aria-current="page">Portfolio</a>
         <a href="contact.html" class="nav-cta btn btn-primary" style="padding: 10px 24px; font-size: 0.85rem;">Let's Talk</a>
       </div>
       <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
@@ -58,24 +59,25 @@
   <!-- Page Header -->
   <header class="page-header">
     <div class="container">
-      <span class="label" style="display:inline-block; margin-bottom:16px;">My Work</span>
+      <span class="label">My Work</span>
       <h1>Creative <span class="gradient-text">Portfolio</span></h1>
       <p>A showcase of selected projects spanning web design, branding, and full-stack development.</p>
     </div>
   </header>
 
   <!-- Portfolio Grid -->
-  <section class="section" style="padding-top: 40px;">
+  <section class="section portfolio-section" aria-labelledby="selected-work-title">
     <div class="container">
+      <div class="portfolio-intro">
+        <h2 id="selected-work-title">Selected work</h2>
+        <p>A closer look at what I've built and designed.</p>
+      </div>
       <div class="portfolio-grid stagger-children">
 
         <!-- Project 1: Campus Reports -->
         <div class="portfolio-card tilt-card">
           <div class="portfolio-image">
-            <img src="assets/portfolio/campus-reports.png" alt="Campus Reports - University maintenance reporting platform by Chali Daniel" loading="lazy">
-            <div class="portfolio-overlay">
-              <span style="color:#fff; font-size:0.9rem;">Hover to explore</span>
-            </div>
+            <img src="assets/portfolio/campus-reports.png" alt="Campus Reports - University maintenance reporting platform by Chali Daniel" loading="lazy" width="800" height="500">
           </div>
           <div class="portfolio-info">
             <span class="portfolio-category">Full-Stack Web App</span>
@@ -88,17 +90,14 @@
               <span class="portfolio-tool">Express.js</span>
               <span class="portfolio-tool">Vercel</span>
             </div>
-            <a href="https://campusreports.vercel.app" target="_blank" rel="noopener" class="btn btn-outline" style="margin-top: 16px; padding: 8px 16px; font-size: 0.8rem;">Visit Project →</a>
+            <a href="https://campusreports.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-outline portfolio-visit" aria-label="Visit Campus Reports (opens in a new tab)">Visit Project →</a>
           </div>
         </div>
 
         <!-- Project 2: CampusCare -->
         <div class="portfolio-card tilt-card">
           <div class="portfolio-image">
-            <img src="assets/portfolio/campus-care.png" alt="CampusCare - AI-powered campus management system by Chali Daniel" loading="lazy">
-            <div class="portfolio-overlay">
-              <span style="color:#fff; font-size:0.9rem;">Hover to explore</span>
-            </div>
+            <img src="assets/portfolio/campus-care.png" alt="CampusCare - AI-powered campus management system by Chali Daniel" loading="lazy" width="800" height="500">
           </div>
           <div class="portfolio-info">
             <span class="portfolio-category">AI-Powered Platform</span>
@@ -117,10 +116,7 @@
         <!-- Project 3: Restaurant Management System -->
         <div class="portfolio-card tilt-card">
           <div class="portfolio-image">
-            <img src="assets/portfolio/restaurant-pwa.png" alt="Restaurant Management System - Progressive Web App by Chali Daniel" loading="lazy">
-            <div class="portfolio-overlay">
-              <span style="color:#fff; font-size:0.9rem;">Hover to explore</span>
-            </div>
+            <img src="assets/portfolio/restaurant-pwa.png" alt="Restaurant Management System - Progressive Web App by Chali Daniel" loading="lazy" width="800" height="500">
           </div>
           <div class="portfolio-info">
             <span class="portfolio-category">Progressive Web App</span>
@@ -139,10 +135,7 @@
         <!-- Project 4: SMS AI Agent -->
         <div class="portfolio-card tilt-card">
           <div class="portfolio-image">
-            <img src="assets/portfolio/sms-ai.png" alt="SMS AI Agent - Python-based AI chatbot by Chali Daniel" loading="lazy">
-            <div class="portfolio-overlay">
-              <span style="color:#fff; font-size:0.9rem;">Hover to explore</span>
-            </div>
+            <img src="assets/portfolio/sms-ai.png" alt="SMS AI Agent - Python-based AI chatbot by Chali Daniel" loading="lazy" width="800" height="500">
           </div>
           <div class="portfolio-info">
             <span class="portfolio-category">AI/Python Project</span>
@@ -161,10 +154,7 @@
         <!-- Project 5: Kumwesu CDF Platform -->
         <div class="portfolio-card tilt-card">
           <div class="portfolio-image">
-            <img src="assets/portfolio/kumwesu-cdf.png" alt="Kumwesu - Zambian CDF civic participation platform by Chali Daniel" loading="lazy">
-            <div class="portfolio-overlay">
-              <span style="color:#fff; font-size:0.9rem;">Hover to explore</span>
-            </div>
+            <img src="assets/portfolio/kumwesu-cdf.png" alt="Kumwesu - Zambian CDF civic participation platform by Chali Daniel" loading="lazy" width="800" height="500">
           </div>
           <div class="portfolio-info">
             <span class="portfolio-category">Civic Tech Platform</span>
@@ -183,10 +173,7 @@
         <!-- Project 6: KMU Graduation Regalia -->
         <div class="portfolio-card tilt-card">
           <div class="portfolio-image">
-            <img src="assets/portfolio/kmu-regalia-design.png" alt="Official Kapasa Makasa University graduation regalia design by Chali Daniel" loading="lazy">
-            <div class="portfolio-overlay">
-              <span style="color:#fff; font-size:0.9rem;">Hover to explore</span>
-            </div>
+            <img src="assets/portfolio/kmu-regalia-design.png" alt="Official Kapasa Makasa University graduation regalia design by Chali Daniel" loading="lazy" width="800" height="500">
           </div>
           <div class="portfolio-info">
             <span class="portfolio-category">Institutional Design</span>
@@ -204,8 +191,6 @@
       </div>
     </div>
   </section>
-
-
 
   <!-- CTA Section -->
   <section class="section cta-section">
