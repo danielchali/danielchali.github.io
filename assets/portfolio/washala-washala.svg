@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Washala Washala racing game cover</title>
+  <desc id="desc">A stylized sports car races along a neon-lit track with power-up markers.</desc>
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1">
+      <stop stop-color="#101c39"/>
+      <stop offset="1" stop-color="#1c3550"/>
+    </linearGradient>
+    <linearGradient id="road" x2="0" y2="1">
+      <stop stop-color="#28344d"/>
+      <stop offset="1" stop-color="#080d19"/>
+    </linearGradient>
+    <linearGradient id="car" x2="0" y2="1">
+      <stop stop-color="#ffe36e"/>
+      <stop offset="1" stop-color="#ff704f"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="960" height="540" fill="url(#sky)"/>
+  <path d="M0 265 170 220 315 250 460 210 610 245 790 205 960 245V340H0Z" fill="#14233c"/>
+  <path d="M0 315H960L960 540H0Z" fill="url(#road)"/>
+  <path d="M0 315 390 315 250 540H0Z" fill="#f85f73" opacity=".85"/>
+  <path d="M960 315 570 315 710 540H960Z" fill="#36d7d0" opacity=".85"/>
+  <path d="M469 325 491 325 555 540 405 540Z" fill="#e6f6ef" opacity=".8"/>
+  <path d="M145 355 245 355 220 373 130 373Z M740 355 840 355 860 373 770 373Z" fill="#ffe36e"/>
+  <circle cx="720" cy="260" r="27" fill="#a8ff5c" opacity=".28" filter="url(#glow)"/>
+  <path d="M720 238 738 260 720 282 702 260Z" fill="#a8ff5c" stroke="#edffbf" stroke-width="3"/>
+  <circle cx="250" cy="280" r="20" fill="#38e4ef" opacity=".3" filter="url(#glow)"/>
+  <path d="M250 263 264 280 250 297 236 280Z" fill="#38e4ef" stroke="#d4ffff" stroke-width="3"/>
+  <g transform="translate(352 315)">
+    <ellipse cx="128" cy="145" rx="180" ry="30" fill="#ff765c" opacity=".28" filter="url(#glow)"/>
+    <path d="m22 116 22-54q12-27 42-35l57-15q27-7 49 10l48 40 31 9q22 7 30 29l7 24-30 31H35l-27-19Z" fill="url(#car)" stroke="#ffe9a5" stroke-width="5"/>
+    <path d="m96 37 54-14q22-5 39 8l36 31H72Z" fill="#172a44" stroke="#91e6ed" stroke-width="4"/>
+    <path d="M19 111h57m125 0h101" stroke="#fff6c7" stroke-width="10" stroke-linecap="round"/>
+    <path d="M24 137h39m196 0h37" stroke="#fb455d" stroke-width="13" stroke-linecap="round"/>
+    <circle cx="77" cy="149" r="28" fill="#101624" stroke="#98a6b9" stroke-width="7"/>
+    <circle cx="244" cy="149" r="28" fill="#101624" stroke="#98a6b9" stroke-width="7"/>
+    <circle cx="77" cy="149" r="9" fill="#ffe36e"/>
+    <circle cx="244" cy="149" r="9" fill="#ffe36e"/>
+  </g>
+  <path d="M52 92h170M82 119h105M770 110h138M809 137h97" stroke="#38e4ef" stroke-width="5" stroke-linecap="round" opacity=".7"/>
+</svg>

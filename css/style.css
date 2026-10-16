@@ -1387,6 +1387,15 @@ h1, h2, h3, h4, h5, h6 {
   aspect-ratio: 16/9;
 }
 
+.portfolio-image > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 /* --- Sliding Picture Carousel (Campus Reports & Showcases) --- */
 .portfolio-image.slider-container {
   user-select: none;
