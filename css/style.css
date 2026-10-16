@@ -8,6 +8,7 @@
 
 /* --- CSS Variables --- */
 :root {
+  --cursor-plane: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M3 15 28 3 19 29 14 18 3 15Z M14 18 28 3' fill='%2306b6d4' stroke='%23ffffff' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 27 3, pointer;
   /* Colors - Dark Theme (Default) */
   --bg-primary: #070712;
   --bg-secondary: #0d0d1c;
@@ -254,7 +255,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 0.95rem;
-  cursor: pointer;
+  cursor: var(--cursor-plane);
   border: none;
   transition: var(--transition);
   position: relative;
@@ -451,7 +452,7 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
+  cursor: var(--cursor-plane);
   position: relative;
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -517,7 +518,7 @@ h1, h2, h3, h4, h5, h6 {
   display: none;
   flex-direction: column;
   gap: 5px;
-  cursor: pointer;
+  cursor: var(--cursor-plane);
   padding: 8px;
   z-index: 1001;
   background: none;
@@ -670,7 +671,7 @@ h1, h2, h3, h4, h5, h6 {
   background: linear-gradient(135deg, rgba(124,58,237,0.12), rgba(6,182,212,0.12));
   border: 3.5px solid var(--border-hover);
   box-shadow: var(--shadow-apple-avatar);
-  animation: float-circular 6s ease-in-out infinite;
+  animation: float-circular 7s ease-in-out infinite;
   z-index: 2;
   transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
 }
@@ -681,7 +682,7 @@ h1, h2, h3, h4, h5, h6 {
   object-fit: cover;
   object-position: center 12%;
   display: block;
-  border-radius: 50%;
+  border-radius: inherit;
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -725,8 +726,26 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @keyframes float-circular {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-16px); }
+  0%, 100% {
+    transform: translateY(0) rotate(0) scale(1);
+    border-radius: 50%;
+  }
+  24% {
+    border-radius: 46% 54% 52% 48% / 52% 48% 52% 48%;
+  }
+  48% {
+    transform: translateY(-12px) rotate(2deg) scale(1.015);
+    border-radius: 43% 57% 49% 51% / 55% 45% 55% 45%;
+  }
+  72% {
+    border-radius: 52% 48% 55% 45% / 45% 55% 45% 55%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-image-wrapper {
+    animation: none;
+  }
 }
 
 @keyframes pulse-halo-1 {
@@ -832,7 +851,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* --- Page Header (for inner pages) --- */
 .page-header {
-  padding: 118px 0 44px;
+  padding: 104px 0 28px;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -855,20 +874,21 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .page-header h1 {
-  font-size: clamp(2.2rem, 4.8vw, 3.6rem);
+  font-size: clamp(2rem, 3.4vw, 2.8rem);
   font-weight: 800;
-  margin-bottom: 18px;
+  margin-bottom: 8px;
   letter-spacing: -1.2px;
   line-height: 1.18;
 }
 
 .page-header p {
-  font-size: clamp(1rem, 1.35vw, 1.15rem);
+  font-size: 0.98rem;
   color: var(--text-secondary);
-  max-width: 580px;
+  max-width: none;
   margin: 0 auto;
-  line-height: 1.8;
+  line-height: 1.45;
   font-weight: 400;
+  white-space: nowrap;
 }
 
 /* --- About Page --- */
@@ -1335,8 +1355,8 @@ h1, h2, h3, h4, h5, h6 {
 /* --- Portfolio Page --- */
 .portfolio-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-  gap: 32px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
 }
 
 .portfolio-card {
@@ -1364,7 +1384,7 @@ h1, h2, h3, h4, h5, h6 {
 .portfolio-image {
   position: relative;
   overflow: hidden;
-  aspect-ratio: 16/10;
+  aspect-ratio: 16/9;
 }
 
 /* --- Sliding Picture Carousel (Campus Reports & Showcases) --- */
@@ -1421,7 +1441,7 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
+  cursor: var(--cursor-plane);
   z-index: 8;
   opacity: 0;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1471,7 +1491,7 @@ h1, h2, h3, h4, h5, h6 {
   height: 7px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.35);
-  cursor: pointer;
+  cursor: var(--cursor-plane);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -1511,7 +1531,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .portfolio-info {
-  padding: 24px;
+  padding: 18px;
 }
 
 .portfolio-category {
@@ -1525,17 +1545,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .portfolio-info h3 {
-  font-size: 1.25rem;
-  margin-bottom: 8px;
+  font-size: 1.12rem;
+  margin-bottom: 6px;
   font-weight: 700;
   letter-spacing: -0.3px;
 }
 
 .portfolio-info p {
   color: var(--text-secondary);
-  font-size: 0.9rem;
-  margin-bottom: 16px;
-  line-height: 1.6;
+  font-size: 0.85rem;
+  margin-bottom: 12px;
+  line-height: 1.5;
 }
 
 .portfolio-tools {
@@ -1881,6 +1901,10 @@ h1, h2, h3, h4, h5, h6 {
 
 /* --- Responsive --- */
 @media (max-width: 1024px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .footer-grid {
     grid-template-columns: 1fr 1fr;
   }
@@ -1963,7 +1987,8 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .portfolio-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
   }
 
   .footer-grid {
@@ -1989,7 +2014,15 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .page-header {
-    padding: 96px 0 36px;
+    padding: 72px 0 18px;
+  }
+
+  .page-header h1 {
+    font-size: 1.9rem;
+  }
+
+  .page-header p {
+    white-space: normal;
   }
 
   .nav-logo {
@@ -2021,6 +2054,22 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 480px) {
+  .floating-item.skill-chip {
+    display: none;
+  }
+
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-header {
+    padding: 68px 0 16px;
+  }
+
+  .page-header h1 {
+    font-size: 1.7rem;
+  }
+
   .hero-buttons {
     flex-direction: column;
   }
@@ -2301,7 +2350,7 @@ h1, h2, h3, h4, h5, h6 {
   border: 0;
   border-radius: 50% 50% 48% 48%;
   box-shadow: inset -8px -10px 16px rgba(0, 0, 0, 0.2), 0 12px 28px rgba(0, 0, 0, 0.18);
-  cursor: pointer;
+  cursor: var(--cursor-plane);
 }
 
 .floating-item.balloon::before {
@@ -2538,5 +2587,5 @@ button,
 input[type="submit"],
 input[type="button"],
 select {
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M3 15 28 3 19 29 14 18 3 15Z M14 18 28 3' fill='%2306b6d4' stroke='%23ffffff' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 27 3, pointer;
+  cursor: var(--cursor-plane);
 }
