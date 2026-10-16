@@ -263,7 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
             overlay.style.borderRadius = '50%';
 
             const cloneImg = document.createElement('img');
-            cloneImg.src = targetImg ? targetImg.src : 'assets/Me/Danielchali.png';
+            cloneImg.src = targetImg ? targetImg.src : 'assets/Me/DanielChali.png';
             cloneImg.alt = 'Daniel Chali';
             overlay.appendChild(cloneImg);
             document.body.appendChild(overlay);
@@ -305,7 +305,7 @@ document.addEventListener('DOMContentLoaded', () => {
             overlay.style.borderRadius = '20px';
 
             const cloneImg = document.createElement('img');
-            cloneImg.src = targetImg ? targetImg.src : 'assets/Me/Danielchali.png';
+            cloneImg.src = targetImg ? targetImg.src : 'assets/Me/DanielChali.png';
             cloneImg.alt = 'Daniel Chali';
             overlay.appendChild(cloneImg);
             document.body.appendChild(overlay);
