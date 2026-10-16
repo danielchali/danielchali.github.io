@@ -22,6 +22,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <meta name="google-site-verification" content="WL2Hsh_H3trQjtqpxyS0H0rR5uAT8rYX7Dym3blXRmc" />
   <script type="application/ld+json">
   {
@@ -41,17 +43,26 @@
     "knowsAbout": ["Web Design", "Graphics Design", "Full-Stack Development", "MERN Stack", "UI/UX Design", "Brand Identity", "Regalia Design", "AI", "Robotics"],
     "sameAs": [
       "https://danielchali.github.io",
-      "https://github.com/iamdanielchali",
-      "https://www.linkedin.com/in/danielchali"
+      "https://github.com/danielchali",
+      "https://www.linkedin.com/in/danielchali",
+      "https://www.facebook.com/iamchalidaniel"
     ]
   }
+  </script>
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('portfolio-theme');
+      const systemPrefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+      const theme = savedTheme || (systemPrefersLight ? 'light' : 'dark');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
   </script>
 </head>
 <body>
 
-  <!-- Navigation -->
+  <!-- Navigation (Outline Oval Shaped) -->
   <nav class="navbar scrolled" id="navbar">
-    <div class="container nav-inner">
+    <div class="nav-inner">
       <a href="index.html" class="nav-logo">
         <div class="logo-icon"><img src="assets/Me/DredLabs_logo.svg" alt="DredLabs Logo" style="width: 100%; height: 100%; object-fit: contain;"></div>
         <span>Daniel <span class="gradient-text">Chali</span></span>
@@ -63,9 +74,15 @@
         <a href="portfolio.html">Portfolio</a>
         <a href="contact.html" class="nav-cta btn btn-primary" style="padding: 10px 24px; font-size: 0.85rem;">Let's Talk</a>
       </div>
-      <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
-        <span></span><span></span><span></span>
-      </button>
+      <div class="nav-actions">
+        <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+          <i class="fas fa-sun icon-sun" aria-hidden="true"></i>
+          <i class="fas fa-moon icon-moon" aria-hidden="true"></i>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </nav>
   <div class="nav-overlay" id="nav-overlay"></div>
@@ -85,7 +102,7 @@
       <div class="about-grid">
         <div class="about-image-wrapper reveal-left">
           <div class="about-image">
-            <img src="assets/Me/DanielChali.png" alt="Daniel Chali" style="width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-lg);">
+            <img src="assets/Me/Danielchali.png" alt="Daniel Chali">
           </div>
           <div class="about-image-badge">3+ Years Exp.</div>
         </div>
@@ -273,8 +290,9 @@
         <div class="footer-col">
           <h4>Connect</h4>
           <a href="mailto:iamdanielchali@gmail.com">Email</a>
-          <a href="https://github.com/iamdanielchali" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://github.com/danielchali" target="_blank" rel="noopener">GitHub</a>
           <a href="https://www.linkedin.com/in/danielchali" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://www.facebook.com/iamchalidaniel" target="_blank" rel="noopener">Facebook</a>
           <a href="https://danielchali.vercel.app" target="_blank" rel="noopener">Vercel</a>
         </div>
       </div>
@@ -285,6 +303,8 @@
     </div>
   </footer>
 
+  <script src="js/three-scene.js"></script>
+  <script src="js/water-effect.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

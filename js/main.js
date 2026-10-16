@@ -5,6 +5,370 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  // ---- Theme Toggle System (Dark / Light) ----
+  const initTheme = () => {
+    const savedTheme = localStorage.getItem('portfolio-theme');
+    const systemPrefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+    const currentTheme = savedTheme || (systemPrefersLight ? 'light' : 'dark');
+    
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    updateThemeButtons(currentTheme);
+  };
+
+  const updateThemeButtons = (theme) => {
+    const themeButtons = document.querySelectorAll('.theme-toggle-btn');
+    themeButtons.forEach(btn => {
+      btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+      btn.setAttribute('title', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+      if (theme === 'light') {
+        btn.classList.add('is-light');
+      } else {
+        btn.classList.remove('is-light');
+      }
+    });
+  };
+
+  const toggleTheme = () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('portfolio-theme', newTheme);
+    updateThemeButtons(newTheme);
+
+    // Dispatch themechange event for water simulation and canvas
+    window.dispatchEvent(new CustomEvent('themechange', { detail: { theme: newTheme } }));
+  };
+
+  document.querySelectorAll('.theme-toggle-btn').forEach(btn => {
+    btn.addEventListener('click', toggleTheme);
+  });
+
+  initTheme();
+
+  // ---- Ambient Floating Items on Every Page (Real Skills & 3D Objects) ----
+  const initFloatingItems = () => {
+    if (document.querySelector('.floating-items-container')) return;
+
+    const container = document.createElement('div');
+    container.className = 'floating-items-container';
+
+    // Real skill chips with official brand icons & realistic 3D geometric shapes
+    const itemsData = [
+      { html: '<i class="fa-brands fa-react" style="color: #06b6d4;"></i><span>React</span>', top: '18%', right: '5%', type: 'skill-chip', anim: 'float-1', delay: '0s' },
+      { html: '', top: '43%', left: '7%', size: '52px', type: 'balloon balloon-coral', anim: 'float-2', delay: '0.8s' },
+      { html: '', top: '76%', left: '24%', size: '36px', type: 'shape-sphere3d', anim: 'float-3', delay: '1.2s' },
+      { html: '', top: '78%', right: '22%', size: '52px', type: 'balloon balloon-cyan', anim: 'float-4', delay: '0.4s' },
+      { html: '', top: '49%', right: '20%', size: '32px', type: 'shape-cube3d', anim: 'float-1', delay: '2s' },
+      { html: '<i class="fa-brands fa-node-js" style="color: #22c55e;"></i><span>Node.js</span>', top: '70%', left: '4%', type: 'skill-chip', anim: 'float-3', delay: '1s' }
+    ];
+
+    itemsData.forEach((item) => {
+      const el = document.createElement('div');
+      el.className = `floating-item ${item.type} ${item.anim}`;
+      el.innerHTML = item.html;
+      el.setAttribute('draggable', 'false');
+      el.style.top = item.top;
+      if (item.left) el.style.left = item.left;
+      if (item.right) el.style.right = item.right;
+      if (item.size) {
+        el.style.width = item.size;
+        el.style.height = item.size;
+      }
+      el.style.animationDelay = item.delay;
+
+      if (item.type.includes('balloon')) {
+        el.setAttribute('role', 'button');
+        el.setAttribute('tabindex', '0');
+        el.setAttribute('aria-label', 'Pop balloon');
+        el.addEventListener('pointerdown', (event) => {
+          event.preventDefault();
+          el.classList.add('is-popped');
+          window.setTimeout(() => el.remove(), 320);
+        }, { once: true });
+        el.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            el.classList.add('is-popped');
+            window.setTimeout(() => el.remove(), 320);
+          }
+        }, { once: true });
+      } else {
+        el.addEventListener('pointerdown', (event) => {
+          if (event.button !== 0) return;
+          const rect = el.getBoundingClientRect();
+          el.classList.add('is-dragging');
+          el.style.left = `${rect.left}px`;
+          el.style.top = `${rect.top}px`;
+          el.style.right = 'auto';
+          el.setPointerCapture(event.pointerId);
+
+          const moveItem = (moveEvent) => {
+            el.style.left = `${Math.max(0, Math.min(window.innerWidth - rect.width, moveEvent.clientX - rect.width / 2))}px`;
+            el.style.top = `${Math.max(0, Math.min(window.innerHeight - rect.height, moveEvent.clientY - rect.height / 2))}px`;
+          };
+          const releaseItem = () => {
+            el.classList.remove('is-dragging');
+            el.removeEventListener('pointermove', moveItem);
+            el.removeEventListener('pointerup', releaseItem);
+            el.removeEventListener('pointercancel', releaseItem);
+          };
+
+          el.addEventListener('pointermove', moveItem);
+          el.addEventListener('pointerup', releaseItem);
+          el.addEventListener('pointercancel', releaseItem);
+          event.preventDefault();
+        });
+      }
+
+      container.appendChild(el);
+    });
+
+    document.body.appendChild(container);
+  };
+
+  initFloatingItems();
+
+  // ---- Campus Reports & Showcase Sliding Picture Carousels ----
+  const initSliders = () => {
+    const sliderContainers = document.querySelectorAll('.slider-container');
+    sliderContainers.forEach((container) => {
+      const track = container.querySelector('.slider-track');
+      const slides = container.querySelectorAll('.slide');
+      const prevBtn = container.querySelector('.slider-prev');
+      const nextBtn = container.querySelector('.slider-next');
+      const dots = container.querySelectorAll('.slider-dot');
+
+      if (!track || slides.length <= 1) return;
+
+      let currentIndex = 0;
+      let autoplayTimer = null;
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      const updateSlider = (index) => {
+        currentIndex = (index + slides.length) % slides.length;
+        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('active', i === currentIndex);
+        });
+
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === currentIndex);
+        });
+      };
+
+      const nextSlide = () => updateSlider(currentIndex + 1);
+      const prevSlide = () => updateSlider(currentIndex - 1);
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          nextSlide();
+          resetAutoplay();
+        });
+      }
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          prevSlide();
+          resetAutoplay();
+        });
+      }
+
+      dots.forEach((dot) => {
+        dot.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const targetIndex = parseInt(dot.getAttribute('data-index'), 10);
+          updateSlider(targetIndex);
+          resetAutoplay();
+        });
+      });
+
+      // Touch / Swipe Support
+      container.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        stopAutoplay();
+      }, { passive: true });
+
+      container.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const threshold = 40;
+        if (touchEndX < touchStartX - threshold) {
+          nextSlide();
+        } else if (touchEndX > touchStartX + threshold) {
+          prevSlide();
+        }
+        startAutoplay();
+      }, { passive: true });
+
+      // Autoplay with hover pause
+      const startAutoplay = () => {
+        stopAutoplay();
+        autoplayTimer = setInterval(nextSlide, 3800);
+      };
+
+      const stopAutoplay = () => {
+        if (autoplayTimer) clearInterval(autoplayTimer);
+      };
+
+      const resetAutoplay = () => {
+        stopAutoplay();
+        startAutoplay();
+      };
+
+      container.addEventListener('mouseenter', stopAutoplay);
+      container.addEventListener('mouseleave', startAutoplay);
+
+      startAutoplay();
+    });
+  };
+
+  initSliders();
+
+  // ---- Seamless Photo Morph Transition (Home <-> About) ----
+  const initPhotoMorphTransition = () => {
+    const rawPath = window.location.pathname.toLowerCase();
+    const isHomePage = rawPath.endsWith('index.html') || rawPath === '/' || rawPath.endsWith('/') || (!rawPath.includes('about') && !rawPath.includes('services') && !rawPath.includes('portfolio') && !rawPath.includes('contact'));
+    const isAboutPage = rawPath.includes('about');
+
+    // Check if arriving from a cross-page morph
+    const storedMorph = sessionStorage.getItem('morph-photo-data');
+    if (storedMorph) {
+      sessionStorage.removeItem('morph-photo-data');
+      try {
+        const data = JSON.parse(storedMorph);
+        
+        if (data.from === 'home' && isAboutPage) {
+          // Home -> About: expands seamlessly into About image card
+          const targetWrapper = document.querySelector('.about-image');
+          if (targetWrapper) {
+            const targetImg = targetWrapper.querySelector('img');
+            const targetRect = targetWrapper.getBoundingClientRect();
+            
+            if (targetImg) targetImg.style.opacity = '0';
+
+            const overlay = document.createElement('div');
+            overlay.className = 'photo-morph-overlay';
+            overlay.style.transition = 'none';
+            overlay.style.top = `${data.originRect.top}px`;
+            overlay.style.left = `${data.originRect.left}px`;
+            overlay.style.width = `${data.originRect.width}px`;
+            overlay.style.height = `${data.originRect.height}px`;
+            overlay.style.borderRadius = '50%';
+
+            const cloneImg = document.createElement('img');
+            cloneImg.src = targetImg ? targetImg.src : 'assets/Me/Danielchali.png';
+            cloneImg.alt = 'Daniel Chali';
+            overlay.appendChild(cloneImg);
+            document.body.appendChild(overlay);
+
+            // Force reflow so starting frame is locked in
+            void overlay.offsetHeight;
+
+            overlay.style.transition = 'top 0.52s cubic-bezier(0.16, 1, 0.3, 1), left 0.52s cubic-bezier(0.16, 1, 0.3, 1), width 0.52s cubic-bezier(0.16, 1, 0.3, 1), height 0.52s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.52s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.52s ease';
+
+            requestAnimationFrame(() => {
+              overlay.style.top = `${targetRect.top}px`;
+              overlay.style.left = `${targetRect.left}px`;
+              overlay.style.width = `${targetRect.width}px`;
+              overlay.style.height = `${targetRect.height}px`;
+              overlay.style.borderRadius = '20px';
+            });
+
+            setTimeout(() => {
+              if (targetImg) targetImg.style.opacity = '1';
+              overlay.remove();
+            }, 550);
+          }
+        } else if (data.from === 'about' && isHomePage) {
+          // About -> Home: shrinks seamlessly into Home circular frame
+          const targetWrapper = document.querySelector('.hero-image-wrapper');
+          if (targetWrapper) {
+            const targetImg = targetWrapper.querySelector('img');
+            const targetRect = targetWrapper.getBoundingClientRect();
+
+            targetWrapper.style.opacity = '0';
+
+            const overlay = document.createElement('div');
+            overlay.className = 'photo-morph-overlay';
+            overlay.style.transition = 'none';
+            overlay.style.top = `${data.originRect.top}px`;
+            overlay.style.left = `${data.originRect.left}px`;
+            overlay.style.width = `${data.originRect.width}px`;
+            overlay.style.height = `${data.originRect.height}px`;
+            overlay.style.borderRadius = '20px';
+
+            const cloneImg = document.createElement('img');
+            cloneImg.src = targetImg ? targetImg.src : 'assets/Me/Danielchali.png';
+            cloneImg.alt = 'Daniel Chali';
+            overlay.appendChild(cloneImg);
+            document.body.appendChild(overlay);
+
+            // Force reflow so starting frame is locked in
+            void overlay.offsetHeight;
+
+            overlay.style.transition = 'top 0.52s cubic-bezier(0.16, 1, 0.3, 1), left 0.52s cubic-bezier(0.16, 1, 0.3, 1), width 0.52s cubic-bezier(0.16, 1, 0.3, 1), height 0.52s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.52s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.52s ease';
+
+            requestAnimationFrame(() => {
+              overlay.style.top = `${targetRect.top}px`;
+              overlay.style.left = `${targetRect.left}px`;
+              overlay.style.width = `${targetRect.width}px`;
+              overlay.style.height = `${targetRect.height}px`;
+              overlay.style.borderRadius = '50%';
+            });
+
+            setTimeout(() => {
+              targetWrapper.style.opacity = '1';
+              overlay.remove();
+            }, 550);
+          }
+        }
+      } catch (err) {
+        console.warn('Photo morph transition error:', err);
+      }
+    }
+
+    // Capture click on links connecting Home and About
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a');
+      if (!link) return;
+
+      const href = link.getAttribute('href');
+      if (!href) return;
+      const lowerHref = href.toLowerCase();
+
+      if (isHomePage && lowerHref.includes('about')) {
+        const heroPhoto = document.querySelector('.hero-image-wrapper');
+        if (heroPhoto) {
+          const rect = heroPhoto.getBoundingClientRect();
+          sessionStorage.setItem('morph-photo-data', JSON.stringify({
+            from: 'home',
+            to: 'about',
+            originRect: { top: rect.top, left: rect.left, width: rect.width, height: rect.height }
+          }));
+        }
+      } else if (isAboutPage && (lowerHref.includes('index') || lowerHref === '/' || lowerHref === './' || link.classList.contains('nav-logo'))) {
+        const aboutPhoto = document.querySelector('.about-image');
+        if (aboutPhoto) {
+          const rect = aboutPhoto.getBoundingClientRect();
+          sessionStorage.setItem('morph-photo-data', JSON.stringify({
+            from: 'about',
+            to: 'home',
+            originRect: { top: rect.top, left: rect.left, width: rect.width, height: rect.height }
+          }));
+        }
+      }
+    });
+  };
+
+  initPhotoMorphTransition();
+
   // ---- Navigation ----
   const navbar = document.querySelector('.navbar');
   const hamburger = document.querySelector('.hamburger');
@@ -432,26 +796,5 @@ document.addEventListener('DOMContentLoaded', () => {
   if (yearEl) {
     yearEl.textContent = new Date().getFullYear();
   }
-
-  // ---- Add ripple effect CSS ----
-  const style = document.createElement('style');
-  style.textContent = `
-    .ripple {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.5);
-      transform: scale(0);
-      animation: ripple-animation 0.6s ease-out;
-      pointer-events: none;
-    }
-
-    @keyframes ripple-animation {
-      to {
-        transform: scale(4);
-        opacity: 0;
-      }
-    }
-  `;
-  document.head.appendChild(style);
 
 });

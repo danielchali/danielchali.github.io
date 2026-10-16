@@ -4,8 +4,18 @@
    =========================== */
 
 function initThreeScene(canvasId) {
-  const container = document.getElementById(canvasId);
-  if (!container) return;
+  let container = document.getElementById(canvasId);
+  if (!container) {
+    const headerParent = document.querySelector('.hero') || document.querySelector('.page-header') || document.body;
+    if (headerParent) {
+      container = document.createElement('div');
+      container.id = canvasId;
+      container.className = 'hero-canvas page-bg-canvas';
+      headerParent.prepend(container);
+    } else {
+      return;
+    }
+  }
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
@@ -17,56 +27,65 @@ function initThreeScene(canvasId) {
   renderer.setClearColor(0x000000, 0);
   container.appendChild(renderer.domElement);
 
-  // Materials
-  const matViolet = new THREE.MeshBasicMaterial({ color: 0x7c3aed, wireframe: true, transparent: true, opacity: 0.25 });
+  // Lighting for real 3D physical shapes
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.85);
+  scene.add(ambientLight);
+
+  const lightViolet = new THREE.PointLight(0x7c3aed, 2.5, 90);
+  lightViolet.position.set(-16, 16, 25);
+  scene.add(lightViolet);
+
+  const lightCyan = new THREE.PointLight(0x06b6d4, 2.2, 90);
+  lightCyan.position.set(16, -12, 25);
+  scene.add(lightCyan);
+
+  // Materials - Real 3D physical shaded & wireframe accents
+  const matVioletSolid = new THREE.MeshPhongMaterial({ color: 0x7c3aed, specular: 0xc4b5fd, shininess: 80, transparent: true, opacity: 0.35 });
+  const matCyanSolid = new THREE.MeshPhongMaterial({ color: 0x06b6d4, specular: 0x67e8f9, shininess: 90, transparent: true, opacity: 0.32 });
+  const matPinkSolid = new THREE.MeshPhongMaterial({ color: 0xec4899, specular: 0xf472b6, shininess: 85, transparent: true, opacity: 0.28 });
+  const matViolet = new THREE.MeshBasicMaterial({ color: 0x7c3aed, wireframe: true, transparent: true, opacity: 0.22 });
   const matCyan = new THREE.MeshBasicMaterial({ color: 0x06b6d4, wireframe: true, transparent: true, opacity: 0.2 });
-  const matPink = new THREE.MeshBasicMaterial({ color: 0xec4899, wireframe: true, transparent: true, opacity: 0.18 });
+  const matPink = new THREE.MeshBasicMaterial({ color: 0xec4899, wireframe: true, transparent: true, opacity: 0.16 });
   const matWhite = new THREE.MeshBasicMaterial({ color: 0xa78bfa, wireframe: true, transparent: true, opacity: 0.12 });
 
-  // Create geometries
+  // Create real 3D geometries
   const shapes = [];
 
-  // Large icosahedron
-  const ico1 = new THREE.Mesh(new THREE.IcosahedronGeometry(6, 1), matViolet);
-  ico1.position.set(-12, 5, -10);
-  scene.add(ico1);
-  shapes.push({ mesh: ico1, rotSpeed: { x: 0.002, y: 0.003 }, floatSpeed: 0.5, floatAmount: 2 });
+  // Real 3D Glossy Sphere
+  const sphere1 = new THREE.Mesh(new THREE.SphereGeometry(3.5, 32, 32), matCyanSolid);
+  sphere1.position.set(-14, 6, -8);
+  scene.add(sphere1);
+  shapes.push({ mesh: sphere1, rotSpeed: { x: 0.002, y: 0.003 }, floatSpeed: 0.5, floatAmount: 2 });
 
-  // Torus
-  const torus1 = new THREE.Mesh(new THREE.TorusGeometry(4, 1.2, 8, 24), matCyan);
-  torus1.position.set(14, -3, -8);
+  // Real 3D Glossy Cube
+  const cube1 = new THREE.Mesh(new THREE.BoxGeometry(4.2, 4.2, 4.2), matVioletSolid);
+  cube1.position.set(15, -4, -6);
+  scene.add(cube1);
+  shapes.push({ mesh: cube1, rotSpeed: { x: 0.003, y: 0.004 }, floatSpeed: 0.65, floatAmount: 1.8 });
+
+  // Real 3D Torus Ring
+  const torus1 = new THREE.Mesh(new THREE.TorusGeometry(3.8, 1.2, 16, 32), matPinkSolid);
+  torus1.position.set(-8, -9, -5);
   scene.add(torus1);
-  shapes.push({ mesh: torus1, rotSpeed: { x: 0.003, y: 0.002 }, floatSpeed: 0.7, floatAmount: 1.5 });
+  shapes.push({ mesh: torus1, rotSpeed: { x: 0.004, y: 0.002 }, floatSpeed: 0.6, floatAmount: 1.6 });
 
-  // Octahedron
-  const oct1 = new THREE.Mesh(new THREE.OctahedronGeometry(3.5, 0), matPink);
-  oct1.position.set(-8, -8, -5);
-  scene.add(oct1);
-  shapes.push({ mesh: oct1, rotSpeed: { x: 0.004, y: 0.001 }, floatSpeed: 0.6, floatAmount: 1.8 });
+  // 3D Icosahedron
+  const ico1 = new THREE.Mesh(new THREE.IcosahedronGeometry(5.5, 1), matViolet);
+  ico1.position.set(12, 9, -12);
+  scene.add(ico1);
+  shapes.push({ mesh: ico1, rotSpeed: { x: 0.002, y: 0.003 }, floatSpeed: 0.55, floatAmount: 2 });
 
-  // Small icosahedron
-  const ico2 = new THREE.Mesh(new THREE.IcosahedronGeometry(2.5, 0), matWhite);
-  ico2.position.set(10, 8, -12);
-  scene.add(ico2);
-  shapes.push({ mesh: ico2, rotSpeed: { x: 0.001, y: 0.004 }, floatSpeed: 0.8, floatAmount: 1.2 });
-
-  // Dodecahedron
-  const dodec = new THREE.Mesh(new THREE.DodecahedronGeometry(4, 0), matViolet);
-  dodec.position.set(0, -10, -15);
+  // 3D Dodecahedron
+  const dodec = new THREE.Mesh(new THREE.DodecahedronGeometry(3.8, 0), matCyan);
+  dodec.position.set(0, -11, -14);
   scene.add(dodec);
-  shapes.push({ mesh: dodec, rotSpeed: { x: 0.002, y: 0.002 }, floatSpeed: 0.4, floatAmount: 2.5 });
+  shapes.push({ mesh: dodec, rotSpeed: { x: 0.002, y: 0.002 }, floatSpeed: 0.45, floatAmount: 2.2 });
 
-  // Torus knot
-  const knot = new THREE.Mesh(new THREE.TorusKnotGeometry(3, 0.8, 64, 8), matCyan);
-  knot.position.set(-15, 10, -18);
+  // 3D Torus knot
+  const knot = new THREE.Mesh(new THREE.TorusKnotGeometry(3, 0.85, 64, 16), matVioletSolid);
+  knot.position.set(-16, 12, -16);
   scene.add(knot);
-  shapes.push({ mesh: knot, rotSpeed: { x: 0.001, y: 0.002 }, floatSpeed: 0.3, floatAmount: 1 });
-
-  // Second torus
-  const torus2 = new THREE.Mesh(new THREE.TorusGeometry(2.5, 0.8, 8, 20), matPink);
-  torus2.position.set(18, 6, -14);
-  scene.add(torus2);
-  shapes.push({ mesh: torus2, rotSpeed: { x: 0.003, y: 0.003 }, floatSpeed: 0.9, floatAmount: 1.3 });
+  shapes.push({ mesh: knot, rotSpeed: { x: 0.001, y: 0.002 }, floatSpeed: 0.35, floatAmount: 1.2 });
 
   // Particles
   const particleCount = 200;
@@ -125,6 +144,24 @@ function initThreeScene(canvasId) {
   }
 
   animate();
+
+  // Update materials on theme change
+  const updateMaterialsForTheme = (isLight) => {
+    matVioletSolid.opacity = isLight ? 0.45 : 0.35;
+    matCyanSolid.opacity = isLight ? 0.42 : 0.32;
+    matPinkSolid.opacity = isLight ? 0.38 : 0.28;
+    matViolet.opacity = isLight ? 0.35 : 0.22;
+    matCyan.opacity = isLight ? 0.32 : 0.2;
+    matPink.opacity = isLight ? 0.28 : 0.16;
+    matWhite.opacity = isLight ? 0.22 : 0.12;
+    particleMat.opacity = isLight ? 0.6 : 0.5;
+  };
+
+  updateMaterialsForTheme(document.documentElement.getAttribute('data-theme') === 'light');
+
+  window.addEventListener('themechange', (e) => {
+    updateMaterialsForTheme(e.detail ? e.detail.theme === 'light' : document.documentElement.getAttribute('data-theme') === 'light');
+  });
 
   // Handle resize
   window.addEventListener('resize', () => {
