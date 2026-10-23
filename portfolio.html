@@ -147,8 +147,21 @@
 
         <!-- Project 3: DPlayer -->
         <div class="portfolio-card tilt-card">
-          <div class="portfolio-image">
-            <img src="assets/portfolio/DPlayer.png" alt="DPlayer smart video player interface" loading="lazy">
+          <div class="portfolio-image slider-container" id="dplayer-slider-portfolio" aria-label="DPlayer screenshots">
+            <div class="slider-track">
+              <div class="slide active">
+                <img src="assets/portfolio/DPlayer.png" alt="DPlayer smart video player interface" loading="lazy">
+              </div>
+              <div class="slide">
+                <img src="assets/portfolio/DPlayer-translation.jpg" alt="DPlayer AI translation and multilingual video understanding" loading="lazy">
+              </div>
+            </div>
+            <button type="button" class="slider-nav-btn slider-prev" aria-label="Previous DPlayer screenshot"><i class="fas fa-chevron-left"></i></button>
+            <button type="button" class="slider-nav-btn slider-next" aria-label="Next DPlayer screenshot"><i class="fas fa-chevron-right"></i></button>
+            <div class="slider-dots">
+              <span class="slider-dot active" data-index="0" aria-label="DPlayer screenshot 1"></span>
+              <span class="slider-dot" data-index="1" aria-label="DPlayer screenshot 2"></span>
+            </div>
             <img src="assets/portfolio/DPlayer-logo.png" alt="DPlayer logo" class="project-logo-mark" loading="lazy">
             <div class="portfolio-overlay">
               <a href="https://deeplayer.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding:10px 20px; font-size:0.85rem;"><i class="fas fa-external-link-alt" style="margin-right: 4px;"></i>Visit DPlayer</a>
