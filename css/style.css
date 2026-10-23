@@ -1396,6 +1396,18 @@ h1, h2, h3, h4, h5, h6 {
   display: block;
 }
 
+.portfolio-image > img.project-logo-mark {
+  inset: 14px auto auto 14px;
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  padding: 6px;
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
 /* --- Sliding Picture Carousel (Campus Reports & Showcases) --- */
 .portfolio-image.slider-container {
   user-select: none;
