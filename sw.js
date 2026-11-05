@@ -1,4 +1,4 @@
-const CACHE_NAME = 'danielchali-site-v1';
+const CACHE_NAME = 'danielchali-site-v2';
 
 const PRECACHE_URLS = [
   './',
@@ -11,7 +11,7 @@ const PRECACHE_URLS = [
   './js/main.js',
   './js/three-scene.js',
   './js/water-effect.js',
-  './assets/Me/DanielChali.png',
+  './assets/Me/DanielChali.webp',
   './assets/Me/DredLabs_logo.svg'
 ];
 
