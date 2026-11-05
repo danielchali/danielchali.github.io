@@ -1,3 +1,4 @@
+# Allow search engines to crawl all public pages and assets.
 User-agent: *
 Allow: /
 
